@@ -7,7 +7,6 @@ const cors = require('cors')({origin: true})
 exports.helloWorld = functions.https.onRequest((request, response) => {
     console.log(request)
     cors(request, response, () => {
-        
         response.status(200).send("Das ist Version 0.1");
     })
 });
