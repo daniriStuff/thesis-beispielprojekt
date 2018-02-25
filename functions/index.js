@@ -6,8 +6,7 @@ const cors = require('cors')({ origin: true })
  */
 exports.exampleFunction = functions.https.onRequest((request, response) => {
     // Die Zahlenfolge vom request abfangen und zuweisen
-    let zf = request.body['zahlenfolge']
-    console.log(request.body['zahlenfolge'])
+    let zf = JSON.parse(request.body).zahlenfolge
     // Neues temporaeres Array welches danach die Zahlen sortiert
     let zfA = []
     // Die Zahlenfolge als string zu einem Array
