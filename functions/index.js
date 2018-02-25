@@ -10,6 +10,7 @@ exports.exampleFunction = functions.https.onRequest((request, response) => {
     // Wird fuer Access-Cross-Platform benoetigt
     cors(request, response, () => {
         // Die Zahlenfolge vom request abfangen und zuweisen
+        console.log(JSON.parse(request.body).zahlenfolge)
         let zf = JSON.parse(request.body).zahlenfolge
         // Neues temporaeres Array welches danach die Zahlen sortiert
         let zfA = []
