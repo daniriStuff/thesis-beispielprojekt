@@ -1,12 +1,24 @@
-const functions = require('firebase-functions');
-const cors = require('cors')({origin: true})
+const functions = require('firebase-functions')
+const cors = require('cors')({ origin: true })
+/**
+ * Dies stellt einen Endpoint bereit, welcher ueber das http-Protokoll angesprochen werden kann.
+ * CRUD-Operationen werden unterstuetzt
+ */
+exports.exampleFunction = functions.https.onRequest((request, response) => {
+    // Die Zahlenfolge vom request abfangen und zuweisen
+    let zf = request.body.zahlenfolge
+    // Neues temporaeres Array welches danach die Zahlen sortiert
+    let zfA = []
+    // Die Zahlenfolge als string zu einem Array
+    for (var i = 0; i < zf.length; i++) {
+        zfA.push(zf.charAt(i))
+    }
+    // Sortieren der Zahlen
+    zfA.sort()
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-exports.helloWorld = functions.https.onRequest((request, response) => {
-    console.log(request)
+    // Wird fuer Access-Cross-Platform benoetigt
     cors(request, response, () => {
-        response.status(200).send("Das ist Version 0.1");
+        // Response zurueck zum client mit einem sortiertem Array
+        response.status(200).send(JSON.stringify(zfA))
     })
-});
+})
